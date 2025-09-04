@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
   // Load User
   const loadUser = useCallback(async () => {
     try {
-      const response = await axios.get('/api/auth/me');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/me`);
       dispatch({
         type: AUTH_ACTIONS.LOGIN_SUCCESS,
         payload: {
@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: AUTH_ACTIONS.LOGIN_START });
       
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
         email,
         password,
       });
@@ -154,7 +154,7 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: AUTH_ACTIONS.REGISTER_START });
       
-      const response = await axios.post('/api/auth/register', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
         name,
         email,
         password,

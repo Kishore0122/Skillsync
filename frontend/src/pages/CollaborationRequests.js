@@ -37,10 +37,10 @@ const CollaborationRequests = () => {
       console.log('Current user:', user);
       
       const [receivedRes, sentRes, projectJoinReceivedRes, projectJoinSentRes] = await Promise.all([
-        axios.get('/api/collaboration-requests/received'),
-        axios.get('/api/collaboration-requests/sent'),
-        axios.get('/api/projects/join-requests/received'),
-        axios.get('/api/projects/join-requests/sent')
+        axios.get(`${process.env.REACT_APP_API_URL}/api/collaboration-requests/received`),
+        axios.get(`${process.env.REACT_APP_API_URL}/api/collaboration-requests/sent`),
+        axios.get(`${process.env.REACT_APP_API_URL}/api/projects/join-requests/received`),
+        axios.get(`${process.env.REACT_APP_API_URL}/api/projects/join-requests/sent`)
       ]);
       
       console.log('Problem collaboration requests received:', receivedRes.data);
@@ -62,7 +62,7 @@ const CollaborationRequests = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get('/api/collaboration-requests/stats');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/collaboration-requests/stats`);
       setStats(response.data);
     } catch (error) {
       console.error('Error fetching stats:', error);
@@ -71,7 +71,7 @@ const CollaborationRequests = () => {
 
   const handleResponse = async (requestId, status) => {
     try {
-      await axios.put(`/api/collaboration-requests/${requestId}/respond`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/collaboration-requests/${requestId}/respond`, {
         status,
         responseMessage
       });

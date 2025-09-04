@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     setError('');
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/forgot-password`, { email });
       setMessage(res.data.message || 'Check your email for reset instructions.');
     } catch (err) {
       setError(err.response?.data?.message || 'Error sending reset email.');
