@@ -14,7 +14,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' ? 'https://skillsync.vercel.app' : 'http://localhost:3000',
+    origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'http://localhost:3000',
     methods: ['GET', 'POST']
   }
 });
@@ -26,7 +26,7 @@ app.use(helmet());
 app.set('trust proxy', 1);
 
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? 'https://skillsync.vercel.app' : 'http://localhost:3000',
+  origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'http://localhost:3000',
   credentials: true
 }));
 

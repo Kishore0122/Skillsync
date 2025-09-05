@@ -398,4 +398,26 @@ router.get('/:userId/collaborations', auth, async (req, res) => {
   }
 });
 
+// GET /api/users - List all users
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find({}, '-password'); // Exclude password field
+    res.json({ users });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// DELETE /api/users/delete-all - Danger: deletes all users
+router.delete('/delete-all', async (req, res) => {
+  try {
+    const result = await User.deleteMany({});
+    res.json({ message: 'All users deleted', deletedCount: result.deletedCount });
+  } catch (error) {
+    console.error('Error deleting all users:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;

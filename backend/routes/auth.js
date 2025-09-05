@@ -47,6 +47,7 @@ router.post('/register', [
     });
 
     await user.save();
+    console.log('✅ Registered new user:', user.email, user._id);
 
     // Generate token
     const token = generateToken(user._id);
@@ -58,13 +59,11 @@ router.post('/register', [
         id: user._id,
         name: user.name,
         email: user.email,
-        avatar: user.avatar,
-        reputation: user.reputation
       }
     });
   } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).json({ message: 'Server error during registration' });
+    console.error('Register error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
@@ -189,6 +188,7 @@ router.post('/reset-password', async (req, res) => {
   user.resetPasswordToken = undefined;
   user.resetPasswordExpires = undefined;
   await user.save();
+  console.log('✅ Password reset for user:', user.email, user._id);
 
   res.json({ message: 'Password has been reset' });
 });

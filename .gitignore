@@ -1,36 +1,96 @@
-# Node
+# Dependencies
 node_modules/
-
-# Env files
-.env
-.env.local
-.env.*.local
-
-# Build
-build/
-dist/
-
-# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# OS
-.DS_Store
-Thumbs.db
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# IDE
+# Production builds
+/frontend/build
+/backend/dist
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# IDE files
 .vscode/
 .idea/
 *.swp
+*.swo
+*~
 
-# Misc
-*.log
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Frontend
-frontend/node_modules/
-frontend/build/
+# Temporary files
+*.tmp
+*.temp
 
-# Backend
-backend/node_modules/
-backend/build/
+# Build artifacts
+build/
+dist/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Next.js
+.next/
+
+# Nuxt.js
+.nuxt/
+
+# Gatsby
+.cache/
+public/
+
+# Storybook
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
