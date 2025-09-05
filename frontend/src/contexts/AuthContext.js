@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import axios from 'axios';
+
+// Set up axios base URL from environment variable or fallback to Render URL
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'https://skillsync-79ns.onrender.com';
 import toast from 'react-hot-toast';
 
 // Create Auth Context
@@ -121,7 +124,7 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: AUTH_ACTIONS.LOGIN_START });
       
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+  const response = await axios.post('/api/auth/login', {
         email,
         password,
       });
@@ -154,7 +157,7 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: AUTH_ACTIONS.REGISTER_START });
       
-      const response = await axios.post('/api/auth/register', {
+  const response = await axios.post('/api/auth/register', {
         name,
         email,
         password,
