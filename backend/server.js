@@ -25,8 +25,20 @@ app.use(helmet());
 // Trust proxy for rate limiting to work correctly
 app.set('trust proxy', 1);
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://skill-syncs.netlify.app'
+];
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'http://localhost:3000',
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
