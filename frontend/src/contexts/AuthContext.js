@@ -1,8 +1,21 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-// Set up axios base URL from environment variable or fallback to local backend
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// Resolve API base URL depending on environment (Netlify build vs local dev)
+const resolveApiBaseUrl = () => {
+  if (process.env.REACT_APP_API_URL) return process.env.REACT_APP_API_URL;
+
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (host.includes('netlify.app')) {
+      return 'https://skillsync-79ns.onrender.com';
+    }
+  }
+
+  return 'http://localhost:5000';
+};
+
+axios.defaults.baseURL = resolveApiBaseUrl();
 import toast from 'react-hot-toast';
 
 // Create Auth Context
