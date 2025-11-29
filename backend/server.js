@@ -25,10 +25,29 @@ app.use(helmet());
 // Trust proxy for rate limiting to work correctly
 app.set('trust proxy', 1);
 
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://skill-syncs.netlify.app'
-];
+// Get allowed origins from environment or use defaults
+const getAllowedOrigins = () => {
+  const origins = [
+    'http://localhost:3000',
+    'https://skill-syncs.netlify.app'
+  ];
+  
+  // Add frontend URL from environment if provided
+  if (process.env.FRONTEND_URL) {
+    origins.push(process.env.FRONTEND_URL);
+  }
+  
+  // In production, allow any origin from the FRONTEND_URL env var
+  // This makes it easier to deploy without hardcoding URLs
+  if (process.env.NODE_ENV === 'production' && process.env.FRONTEND_URL) {
+    return [process.env.FRONTEND_URL, ...origins];
+  }
+  
+  return origins;
+};
+
+const allowedOrigins = getAllowedOrigins();
+
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps, curl, etc.)
@@ -36,6 +55,8 @@ app.use(cors({
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     } else {
+      // Log the blocked origin for debugging
+      console.warn(`CORS blocked origin: ${origin}`);
       return callback(new Error('Not allowed by CORS'));
     }
   },

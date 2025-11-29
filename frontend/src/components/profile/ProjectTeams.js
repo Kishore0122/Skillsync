@@ -57,7 +57,7 @@ const ProjectTeams = ({ userId }) => {
 
   const fetchProjectTeams = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/projects`, {
+      const response = await axios.get(`/api/projects`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       
@@ -87,7 +87,7 @@ const ProjectTeams = ({ userId }) => {
   const openChat = async (project) => {
     try {
       setSelectedChat(project);
-      const response = await axios.get(`http://localhost:5000/api/projects/${project._id}/messages`, {
+      const response = await axios.get(`/api/projects/${project._id}/messages`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setChatMessages(response.data.messages || []);
@@ -176,7 +176,7 @@ const ProjectTeams = ({ userId }) => {
 
     try {
       setSendingMessage(true);
-      await axios.post(`http://localhost:5000/api/projects/${selectedChat._id}/messages`, {
+      await axios.post(`/api/projects/${selectedChat._id}/messages`, {
         content: newMessage.trim()
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

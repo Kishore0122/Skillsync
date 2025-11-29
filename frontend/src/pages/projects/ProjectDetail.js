@@ -24,7 +24,7 @@ const ProjectDetail = () => {
   const fetchProject = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/projects/${id}`);
+      const response = await axios.get(`/api/projects/${id}`);
       setProject(response.data);
       setError('');
     } catch (error) {
@@ -37,7 +37,7 @@ const ProjectDetail = () => {
 
   const handleJoinRequest = async (requestId, action) => {
     try {
-      await axios.put(`http://localhost:5000/api/projects/${id}/join-requests/${requestId}`, {
+      await axios.put(`/api/projects/${id}/join-requests/${requestId}`, {
         action
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -54,7 +54,7 @@ const ProjectDetail = () => {
   const handleDeleteProject = async () => {
     if (window.confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
       try {
-        await axios.delete(`http://localhost:5000/api/projects/${id}`, {
+        await axios.delete(`/api/projects/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         
@@ -75,7 +75,7 @@ const ProjectDetail = () => {
 
     try {
       setJoinLoading(true);
-      await axios.post(`http://localhost:5000/api/projects/${id}/join`, {
+      await axios.post(`/api/projects/${id}/join`, {
         message: joinMessage,
         skills: user.skills || []
       }, {

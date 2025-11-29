@@ -571,7 +571,7 @@ const Profile = () => {
   const fetchChatMessages = async (projectId) => {
     try {
       setLoadingChat(true);
-      const response = await axios.get(`http://localhost:5000/api/projects/${projectId}/messages`, {
+      const response = await axios.get(`/api/projects/${projectId}/messages`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setChatMessages(response.data.messages || []);
@@ -587,7 +587,7 @@ const Profile = () => {
     if (!newMessage.trim() || !selectedProject) return;
 
     try {
-      await axios.post(`http://localhost:5000/api/projects/${selectedProject._id}/messages`, {
+      await axios.post(`/api/projects/${selectedProject._id}/messages`, {
         content: newMessage.trim()
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

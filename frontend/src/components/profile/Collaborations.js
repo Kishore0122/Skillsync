@@ -57,7 +57,7 @@ const Collaborations = ({ userId }) => {
 
   const fetchCollaborations = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/${userId}/collaborations`, {
+      const response = await axios.get(`/api/users/${userId}/collaborations`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setCollaborations(response.data.collaborations);
@@ -74,7 +74,7 @@ const Collaborations = ({ userId }) => {
     
     try {
       setSelectedChat(collaboration);
-      const response = await axios.get(`http://localhost:5000/api/collaborations/${collaboration._id}/messages`, {
+      const response = await axios.get(`/api/collaborations/${collaboration._id}/messages`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       
@@ -181,7 +181,7 @@ const Collaborations = ({ userId }) => {
 
     try {
       setSendingMessage(true);
-      const response = await axios.post(`http://localhost:5000/api/collaborations/${selectedChat._id}/messages`, {
+      const response = await axios.post(`/api/collaborations/${selectedChat._id}/messages`, {
         message: newMessage.trim()
       }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

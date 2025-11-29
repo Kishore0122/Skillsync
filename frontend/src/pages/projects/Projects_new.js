@@ -32,7 +32,7 @@ const Projects = () => {
       if (filters.status) params.append('status', filters.status);
       if (filters.search) params.append('search', filters.search);
 
-      const response = await axios.get(`http://localhost:5000/api/projects?${params.toString()}`);
+      const response = await axios.get(`/api/projects?${params.toString()}`);
       console.log('Projects fetched:', response.data);
       
       setProjects(response.data.projects || response.data);
