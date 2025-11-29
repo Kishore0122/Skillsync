@@ -33,14 +33,8 @@ router.post('/register', [
 
     const { name, email, password } = req.body;
 
-    // Check if user already exists
-    let user = await User.findOne({ email: email.toLowerCase() });
-    if (user) {
-      return res.status(400).json({ message: 'User already exists with this email' });
-    }
-
-    // Create new user
-    user = new User({
+    // Create new user (no duplicate email check)
+    let user = new User({
       name: name.trim(),
       email: email.toLowerCase(),
       password

@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-// Set up axios base URL from environment variable or fallback to Render URL
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'https://skillsync-79ns.onrender.com';
+// Set up axios base URL from environment variable or fallback to local backend
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 import toast from 'react-hot-toast';
 
 // Create Auth Context
